@@ -10,7 +10,8 @@ class CreateUser extends UsecaseWithParams<void, CreateUserParams> {
   final AuthenticationRepository _repository;
 
   @override
-  ResultVoid call(CreateUserParams params) async => _repository.createUser(
+  ResultFuture<void> call(CreateUserParams params) async =>
+      _repository.createUser(
         createdAt: params.createdAt,
         name: params.name,
         avatar: params.avatar,
@@ -24,6 +25,13 @@ class CreateUserParams extends Equatable {
     required this.name,
     required this.avatar,
   });
+
+  const CreateUserParams.empty()
+      : this(
+          createdAt: '_empty.createdAt',
+          name: '_empty.name',
+          avatar: '_empty.avatar',
+        );
 
   final String createdAt;
   final String name;
