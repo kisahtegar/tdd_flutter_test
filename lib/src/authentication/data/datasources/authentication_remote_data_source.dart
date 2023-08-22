@@ -7,7 +7,7 @@ import '../../../../core/utils/constants.dart';
 import '../models/user_model.dart';
 
 const kCreateUserEndpoint = '/test-api/users';
-const kGetUserEndpoint = '/test-api//user';
+const kGetUserEndpoint = '/test-api//users';
 
 abstract class AuthenticationRemoteDataSource {
   Future<void> createUser({
@@ -43,6 +43,9 @@ class AuthRemoteDataSrcImpl implements AuthenticationRemoteDataSource {
           'name': name,
           'avatar': avatar,
         }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       );
 
       if (response.statusCode != 200 && response.statusCode != 201) {
